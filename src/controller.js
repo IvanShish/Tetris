@@ -3,12 +3,12 @@ export default class Controller {
         this.game = game;
         this.view = view;
         this.intervalId = null;
-
         this.intervalId = setInterval(() => {
-            this.updateView();
+            this.updateView(true);
         }, this.speedOfTimer());
 
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
+        //document.addEventListener('keyup', this.handleKeyUp.bind(this));
 
         this.view.renderGame(this.game.getState());
     }
@@ -19,47 +19,54 @@ export default class Controller {
         return speed;
     }
 
-    updateView() {
+    updateView(isNeedToUpdateTimer) {
         if (this.game.getState().isGameOver) {
             this.view.renderGameOverScreen(this.game.getState());
         }
-        else {
+        else if (isNeedToUpdateTimer) {
             this.game.movePieceDown();
+            this.view.renderGame(this.game.getState());
+        }
+        else {
             this.view.renderGame(this.game.getState());
         }
     }
 
-    handleKeyDown() {
+    handleKeyDown(event) {
         switch (event.keyCode) {
             case 37:    //ArrowLeft
                 this.game.movePieceLeft();
-                this.updateView();
+                this.updateView(false);
                 break;
             case 38:    //ArrowUp
                 this.game.rotatePiece();
-                this.updateView();
+                this.updateView(false);
                 break;
             case 39:    //ArrowRight
                 this.game.movePieceRight();
-                this.updateView();
+                this.updateView(false);
                 break;
             case 40:    //ArrowDown
+                //this.stopTimer();
                 this.game.movePieceDown();
-                this.updateView();
+                this.updateView(false);
                 break;
         }
     }
-}
 
-/*
-    <H1>Введите имя игрока</H1>
-    <form NAME="Sel1">
-            <TABLE>
-                <TR><TD><B>Имя пользователя:<B></TD>
-                    <TD><INPUT NAME="Nickname" SIZE=20
-                               onBlur="this.value=this.value.toUpperCase()"></TD></TR>
-            </TABLE>
-            <!-- Кнопки готовности и сброса -->
-            <INPUT TYPE="button" VALUE="Ввод" onClick="Complete();">
-        </form>
- */
+    // startTimer() {
+    //     if (this.intervalId) {
+    //         console.log("YES");
+    //         this.intervalId = setInterval(() => {
+    //             this.updateView(true);
+    //         }, this.speedOfTimer());
+    //     }
+    // }
+    //
+    // stopTimer() {
+    //     if (this.intervalId) {
+    //         clearInterval(this.intervalId);
+    //         this.intervalId = null;
+    //     }
+    // }
+}
