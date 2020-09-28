@@ -53,7 +53,7 @@ export default class View {
     renderGameOverScreen({ level }) {
         this.clearScreen();
 
-        this.context.fillStyle = 'red';
+        this.context.fillStyle = 'white';
         this.context.font = '24px "Press Start 2P"';
         this.context.textAlign = 'center';
         this.context.textBaseline = 'middle';
@@ -78,7 +78,7 @@ export default class View {
             }
         }
 
-        this.context.strokeStyle = "#cb997e";
+        this.context.strokeStyle = "#2b2d42";
         this.context.lineWidth = this.playfieldBorderWidth;
         this.context.strokeRect(this.playfieldX - 5, 0, this.playfieldWidth, this.playfieldHeight - 2);
     }

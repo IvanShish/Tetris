@@ -14,7 +14,7 @@ export default class Game {
     nextPiece = this.createPiece();
 
     get level() {
-        return Math.floor(this.rows * 0.1);
+        return Math.floor(this.rows * 0.5);
     }
 
     movePieceLeft() {

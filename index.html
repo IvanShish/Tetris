@@ -19,12 +19,23 @@
     </style>
     <meta charset="utf-8">
     <div class = "layer1">
-    <form  action="main.html" method="get">
+    <form  action="index.html" method="get">
         <label>
             Введите имя игрока:<br>
-            <input placeholder="Имя пользователя" required><br>
+            <input id="username" placeholder="Имя пользователя" required><br>
         </label>
-        <input type="submit" value="Ввод">
+        <button class="button">Ввод</button>
     </form>
     </div>
+    <script>
+        function store(source) {
+            localStorage["tetris.username"] = source.value;
+        }
+        const button = document.querySelector(".button");
+        button.addEventListener("click", ()=>{
+            const username = document.querySelector("#username");
+            store(username);
+        });
+    </script>
+<!--    <script src="./index.js" nomodule></script>-->
 </html>

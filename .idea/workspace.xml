@@ -24,6 +24,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -39,7 +40,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1601200383611</updated>
-      <workItem from="1601200386229" duration="28222000" />
+      <workItem from="1601200386229" duration="29602000" />
+      <workItem from="1601289114870" duration="7982000" />
+      <workItem from="1601324837515" duration="7000" />
     </task>
     <servers />
   </component>
@@ -47,9 +50,9 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-1334" y="203" key="#Inspections" timestamp="1601218052526">
+    <state x="-1334" y="203" key="#Inspections" timestamp="1601289207513">
       <screen x="-1920" y="5" width="1920" height="1040" />
     </state>
-    <state x="-1334" y="203" key="#Inspections/-1920.5.1920.1040/0.0.1920.1040@-1920.5.1920.1040" timestamp="1601218052526" />
+    <state x="-1334" y="203" key="#Inspections/-1920.5.1920.1040/0.0.1920.1040@-1920.5.1920.1040" timestamp="1601289207513" />
   </component>
 </project>
