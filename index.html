@@ -16,6 +16,13 @@
             font-size: 250%; /* Размер шрифта в процентах */
             vertical-align: top;
         }
+        .recordTable {
+            width: 330px;
+            border: 3px solid green;
+            background: #f0f0f0;
+            margin: auto;
+            margin-top: 100px;
+        }
     </style>
     <meta charset="utf-8">
     <div class = "layer1">
@@ -27,6 +34,32 @@
         <button class="button">Ввод</button>
     </form>
     </div>
+    <div class = "recordTable">
+    <table id="table" align="center">
+        <label>
+            Таблица рекордов:
+        </label>
+        <tr>
+            <th>Игрок</th>
+            <th>Уровень</th>
+        </tr>
+        <tr>
+            <td id = 'name1'></td><td id = 'level1' ></td>
+        </tr>
+        <tr>
+            <td id = 'name2'></td><td id = 'level2'></td>
+        </tr>
+        <tr>
+            <td id = 'name3'></td><td id = 'level3'></td>
+        </tr>
+        <tr>
+            <td id = 'name4'></td><td id = 'level4'></td>
+        </tr>
+        <tr>
+            <td id = 'name5'></td><td id = 'level5'></td>
+        </tr>
+    </table>
+    </div>
     <script>
         function store(source) {
             localStorage["tetris.username"] = source.value;
@@ -36,6 +69,14 @@
             const username = document.querySelector("#username");
             store(username);
         });
+        for (let i = 1; i < 6; i++){
+            const nickname = JSON.parse(localStorage.getItem(i.toString()));
+            if (nickname !=  null){
+                document.getElementById('name' + i).innerHTML = nickname.name;
+                document.getElementById('level' + i).innerHTML = nickname.level;
+            }
+            else break;
+        }
     </script>
-<!--    <script src="./index.js" nomodule></script>-->
+    <script src="./src/controller.js" type = module></script>
 </html>

@@ -30,8 +30,8 @@ export default class View {
 
         this.panelX = 0;
         this.panelY = 0;
-        this.panelWidth = this.width / 3;
-        this.panelHeight = this.height;
+        // this.panelWidth = this.width / 3;
+        // this.panelHeight = this.height;
 
         this.element.appendChild(this.canvas);
     }
@@ -42,14 +42,6 @@ export default class View {
         this.renderPanel(state);
     }
 
-    renderStartScreen() {
-        this.context.fillStyle = 'white';
-        this.context.font = '24px "Press Start 2P"';
-        this.context.textAlign = 'center';
-        this.context.textBaseline = 'middle';
-        this.context.fillText('Введите имя игрока', this.width / 2, 40);
-    }
-
     renderGameOverScreen({ level }) {
         this.clearScreen();
 
@@ -58,7 +50,11 @@ export default class View {
         this.context.textAlign = 'center';
         this.context.textBaseline = 'middle';
         this.context.fillText('GAME OVER', this.width / 2, 70);
-        this.context.fillText(`Level: ${level}`, this.width / 2, 100);
+        this.context.fillText(`Player: ${localStorage["tetris.username"]}`, this.width/2, 100);
+        this.context.fillText(`Level: ${level}`, this.width / 2, 130);
+
+        const restartButton = document.querySelector(".restartButton");
+        restartButton.style.visibility = 'visible';
     }
 
     renderPlayfield({ playfield }) {
@@ -81,6 +77,22 @@ export default class View {
         this.context.strokeStyle = "#2b2d42";
         this.context.lineWidth = this.playfieldBorderWidth;
         this.context.strokeRect(this.playfieldX - 5, 0, this.playfieldWidth, this.playfieldHeight - 2);
+
+        // const stepX = 31;
+        // this.context.strokeStyle = '#2b2d42';
+        // this.context.lineWidth = 1;
+        // for (var i = this.playfieldX + stepX; i < this.width * 2 / 3 - stepX; i += stepX) {
+        //     this.context.moveTo(i, 0);
+        //     this.context.lineTo(i, this.canvas.height);
+        //     this.context.stroke();
+        // }
+        //
+        // const stepY = 31.5;
+        // for (var i = stepY + 5; i < this.playfieldHeight - 2; i += stepY) {
+        //     this.context.moveTo(this.playfieldX - 5, i);
+        //     this.context.lineTo(this.width * 2 / 3 - 2, i);
+        //     this.context.stroke();
+        // }
     }
 
     renderPanel({ level, score, rows, nextPiece }) {
@@ -107,6 +119,7 @@ export default class View {
                 }
             }
         }
+
 
         this.context.fillStyle = 'white';
         this.context.font = '15px "Press Start 2P"';

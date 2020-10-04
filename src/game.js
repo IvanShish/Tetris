@@ -262,4 +262,13 @@ export default class Game {
 
         return lines.length;
     }
+
+    restart() {
+        this.score = 0;
+        this.rows = 0;
+        this.topOut = false;     //Game over
+        this.playfield = this.createPlayfield();
+        this.activePiece = this.createPiece(); //Объект активной фигуры
+        this.nextPiece = this.createPiece();
+    }
 }

@@ -3,12 +3,16 @@ export default class Controller {
         this.game = game;
         this.view = view;
         this.intervalId = null;
-        this.intervalId = setInterval(() => {
+        let speed = 1000;
+        let changeSpeed;
+        this.gameOver = false;
+
+        this.intervalId = setTimeout(changeSpeed = () => {
             this.updateView(true);
-        }, this.speedOfTimer());
+            this.intervalId = setTimeout(changeSpeed, this.speedOfTimer());
+        }, speed);
 
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
-        //document.addEventListener('keyup', this.handleKeyUp.bind(this));
 
         this.view.renderGame(this.game.getState());
     }
@@ -22,6 +26,9 @@ export default class Controller {
     updateView(isNeedToUpdateTimer) {
         if (this.game.getState().isGameOver) {
             this.view.renderGameOverScreen(this.game.getState());
+            this.renderRecord();
+            clearTimeout(this.intervalId);
+            this.gameOver = true;
         }
         else if (isNeedToUpdateTimer) {
             this.game.movePieceDown();
@@ -33,6 +40,8 @@ export default class Controller {
     }
 
     handleKeyDown(event) {
+        if (this.gameOver) return;
+
         switch (event.keyCode) {
             case 37:    //ArrowLeft
                 this.game.movePieceLeft();
@@ -47,12 +56,55 @@ export default class Controller {
                 this.updateView(false);
                 break;
             case 40:    //ArrowDown
-                //this.stopTimer();
+                this.game.movePieceDown();
+                this.updateView(false);
+                break;
+            case 32:    //Space character
                 this.game.movePieceDown();
                 this.updateView(false);
                 break;
         }
     }
+
+    store(src, name, level) {
+        const elem = {
+            name: name,
+            level: level
+        }
+        localStorage.setItem(src.toString(), JSON.stringify(elem));
+    }
+
+    read(src) {
+        return JSON.parse(localStorage.getItem(src.toString()));
+    }
+
+    renderRecord() {
+        let i = 0;
+        let elem;
+
+        for (i; i < 5; i++){
+            elem = this.read(i + 1);
+            if ((elem == null) || (elem.level < this.game.level)){
+                this.store(i + 1, localStorage["tetris.username"], this.game.level);
+
+                if (elem != null) {
+                    i++;
+                    let buff;
+
+                    for (i; i < 5; i++){
+                        buff = this.read(i + 1);
+                        this.store(i + 1, elem.name, elem.level);
+                        elem = buff;
+                        if (elem == null){
+                            break;
+                        }
+                    }
+                }
+                break;
+            }
+        }
+    }
+
 
     // startTimer() {
     //     if (this.intervalId) {

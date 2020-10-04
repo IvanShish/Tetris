@@ -18,6 +18,8 @@ const controller = new Controller(game, view);
 
 const testh2 = document.querySelector(".classh2");
 read(testh2);
+const restartButton = document.querySelector(".restartButton");
+restartButton.style.visibility = 'hidden';
 
 window.game = game;
 window.view = view;
